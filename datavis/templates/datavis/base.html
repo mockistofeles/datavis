@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DataVis - {% block title %}{% endblock %}</title>
+    <script src="{% static 'datavis/js/vendor.js' %}"></script>
+    <script src="{% static 'datavis/js/smartcities.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'datavis/css/smartcities.min.css' %}"/>
+</head>
+<body ng-app="DatavisApp">
+<!-- HEADER -->
+<div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><span>Datavis</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active">
+                    <a href="#">Docs</a>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- End HEADER -->
+<div class="container">
+    {% block content %}
+    {% endblock %}
+    <!--div class="section" ng-controller="GraphController">
+        <svg class="chart"></svg>
+    </div-->
+</div>
+<!-- FOOTER -->
+<footer class="container">
+    <div class="row">
+        <div class="col"></div>
+    </div>
+</footer>
+</body>
+</html>

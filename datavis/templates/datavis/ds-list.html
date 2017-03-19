@@ -1,0 +1,17 @@
+{% extends "datavis/base.html" %}
+
+{% block title %}Results{% endblock %}
+
+{% block content %}
+    <h3>Data Visualize <small>by rodcruzh</small></h3>
+    <h6>Results</h6>
+    {% if datasets %}
+        <ul>
+        {% for ds in datasets %}
+            <li>{{ ds.identifier }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No results.</p>
+    {% endif %}
+{% endblock %}

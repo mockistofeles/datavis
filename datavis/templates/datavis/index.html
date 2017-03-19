@@ -1,0 +1,18 @@
+{% extends "datavis/base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <h3>Data Visualize <small>by rodcruzh</small></h3>
+    <h6>Which topic do you want to search?</h6>
+    <form action="{% url 'datavis:search' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="text" class="form-control" id="topic" name="topic"
+                   placeholder="E. g.: health, education, ...">
+        </div>
+        <button type="submit" class="btn btn-default">
+            <span class="glyphicon glyphicon-search"></span> Search
+        </button>
+    </form>
+{% endblock %}

@@ -1,0 +1,9 @@
+/smartcities/settings/local.py
+/node_modules
+/resources
+/dist
+/.tmp
+/.sass-cache
+/bower_components
+.idea
+.vagrant

@@ -1,0 +1,27 @@
+{
+  "name": "smartcities",
+  "description": "Smartcities DataVis",
+  "main": "bower.json",
+  "authors": [
+    "mockistofeles"
+  ],
+  "license": "LGPL",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.1",
+    "d3": "^4.2.6",
+    "font-awesome": "^4.6.3",
+    "materialize": "^0.97.7",
+    "material-preloader": "*",
+    "angular": "^1.5.8",
+    "angular-ui-router": "^0.3.1"
+  }
+}
