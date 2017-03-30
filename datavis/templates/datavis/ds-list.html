@@ -3,14 +3,43 @@
 {% block title %}Results{% endblock %}
 
 {% block content %}
-    <h3>Data Visualize <small>by rodcruzh</small></h3>
-    <h6>Results</h6>
+    <form action="{% url 'datavis:search' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="text" class="form-control" id="topic" name="topic"
+                   placeholder="E. g.: health, education, ...">
+        </div>
+        <button type="submit" class="btn btn-default">
+            <span class="glyphicon glyphicon-search"></span> Search
+        </button>
+    </form>
+    <br />
+    <ul class="nav nav-tabs nav-justified">
+        <li class="active"><a data-toggle="tab" href="#info">Info</a></li>
+        <li><a data-toggle="tab" href="#filter">Filter</a></li>
+        <li><a data-toggle="tab" href="#order">Order</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="info" class="tab-pane fade in active">
+            <div class="well"><p>Search: </p></div>
+        </div>
+        <div id="filter" class="tab-pane fade">
+            <div class="well"><p>Data source: </p></div>
+        </div>
+        <div id="order" class="tab-pane fade">
+            <div class="well"><p>Order by: </p></div>
+        </div>
+    </div>
+    <hr />
+    <h5>Results</h5>
     {% if datasets %}
-        <ul>
         {% for ds in datasets %}
-            <li>{{ ds.identifier }}</li>
+            <div class="well">
+                <h5>{{ ds.name }}</h5>
+                <h6>{{ ds.description }}</h6>
+                <p>{{ ds.identifier }}</p>
+            </div>
         {% endfor %}
-        </ul>
     {% else %}
         <p>No results.</p>
     {% endif %}

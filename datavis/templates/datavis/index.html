@@ -3,7 +3,8 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-    <h3>Data Visualize <small>by rodcruzh</small></h3>
+    <h3>Data Visualizer <small>by rodcruzh</small></h3>
+    <hr />
     <h6>Which topic do you want to search?</h6>
     <form action="{% url 'datavis:search' %}" method="post">
         {% csrf_token %}
