@@ -14,13 +14,38 @@ def index(request):
 
 
 def search(request):
+    topic = request.POST['topic']
     datasets = []
-    try:
-        datasets.append(DataSet.objects.get(category_dataset__name__icontains=request.POST['topic']))
-    except (KeyError, DataSet.DoesNotExist):
-        datasets = []
+    open_data_sources = []
+    q1 = DataSet.objects.filter(category_dataset__name__icontains=topic)
+    for q in q1:
+        datasets.append(q)
+        if open_data_sources.count(q.open_data_source) == 0:
+            open_data_sources.append(q.open_data_source)
     template = loader.get_template('datavis/ds-list.html')
-    context = {'datasets': datasets}
+    context = {
+        'topic': topic,
+        'datasets': datasets,
+        'open_data_sources': open_data_sources
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def filter(request):
+    ods = request.POST['ods']
+    datasets = []
+    open_data_sources = []
+    q1 = DataSet.objects.filter(category_dataset__name__icontains=topic)
+    for q in q1:
+        datasets.append(q)
+        if open_data_sources.count(q.open_data_source) == 0:
+            open_data_sources.append(q.open_data_source)
+    template = loader.get_template('datavis/ds-list.html')
+    context = {
+        'topic': topic,
+        'datasets': datasets,
+        'open_data_sources': open_data_sources
+    }
     return HttpResponse(template.render(context, request))
 
 
