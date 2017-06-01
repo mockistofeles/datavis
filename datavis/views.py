@@ -1,6 +1,6 @@
-from django.shortcuts import render_to_response
 from django.template import loader
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, render
 from sodapy import Socrata
 from .models import OpenDataSource, CategoryDataSet, DataSet
 import json
@@ -10,15 +10,14 @@ def index(request):
     template = loader.get_template('datavis/index.html')
     context = {'title': 'Home'}
     return HttpResponse(template.render(context, request))
-    # return render_to_response('datavis/index.html', context)
 
 
 def search(request):
     topic = request.POST['topic']
     datasets = []
     open_data_sources = []
-    q1 = DataSet.objects.filter(category_dataset__name__icontains=topic)
-    for q in q1:
+    qs = DataSet.objects.filter(category_dataset__name__icontains=topic)
+    for q in qs:
         datasets.append(q)
         if open_data_sources.count(q.open_data_source) == 0:
             open_data_sources.append(q.open_data_source)
@@ -32,31 +31,40 @@ def search(request):
 
 
 def filter(request):
-    ods = request.POST['ods']
-    datasets = []
-    open_data_sources = []
-    q1 = DataSet.objects.filter(category_dataset__name__icontains=topic)
-    for q in q1:
-        datasets.append(q)
-        if open_data_sources.count(q.open_data_source) == 0:
-            open_data_sources.append(q.open_data_source)
-    template = loader.get_template('datavis/ds-list.html')
-    context = {
-        'topic': topic,
-        'datasets': datasets,
-        'open_data_sources': open_data_sources
-    }
-    return HttpResponse(template.render(context, request))
+    # topic = request.POST['topic']
+    # datasets = []
+    # open_data_sources = []
+    # qs = DataSet.objects.filter(category_dataset__name__icontains=topic)
+    # if request.POST.__contains__('ods'):
+    #     qs = qs.filter(open_data_source_id=request.POST['ods'])
+    # for q in qs:
+    #     datasets.append(q)
+    #    if open_data_sources.count(q.open_data_source) == 0:
+    #         open_data_sources.append(q.open_data_source)
+    # response_data = {
+    #     'datasets': datasets,
+    #     'open_data_sources': open_data_sources
+    # }
+    response_data = {}
+    response_data['result'] = 'Success!'
+    return HttpResponse(
+        json.dumps(response_data),
+        content_type="application/json"
+    )
 
 
-def soda_connect(request):
-    ods = OpenDataSource.objects.get(pk=1)
+def detail(request, dataset_id):
+    dataset = get_object_or_404(DataSet, pk=dataset_id)
+    return render(request, 'datavis/ds-detail.html', {'dataset': dataset})
+
+
+def datavis(request, dataset_id):
+    ods = OpenDataSource.objects.get(pk=dataset_id)
     client = Socrata(ods.website, ods.token, ods.user, ods.password)
-    ds = DataSet.objects.get(pk=1)
-    # https://www.datos.gov.co/resource/wqeu-3uhz.json
-    data = client.get(ds.identifier, where="fechaexpedicion > '01/01/2015'", limit=10)
+    dataset = DataSet.objects.get(pk=dataset_id)
+    data = client.get(dataset.identifier, where="fechaexpedicion > '01/01/2015'", limit=10)
     client.close()
-    template = loader.get_template('datavis/base.html')
+    template = loader.get_template('datavis/datavis.html')
     data = json.dumps(data, indent=4, sort_keys=True)
-    context = {'meds': data}
+    context = {'data': data, 'dataset': dataset}
     return HttpResponse(template.render(context, request))

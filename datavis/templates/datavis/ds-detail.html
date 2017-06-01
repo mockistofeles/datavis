@@ -1,0 +1,33 @@
+{% extends "datavis/base.html" %}
+
+{% block title %}{{ dataset.name }}{% endblock %}
+
+{% block content %}
+        <div class="row">
+            <div class="col-xs-6 col-sm-6">
+                <form action="{% url 'datavis:search' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="topic" value="{{ topic }}" />
+                    <a href="{% url 'datavis:search' %}" role="button" class="btn btn-primary btn-lg">
+                        <div class="glyphicon glyphicon-chevron-left"></div>
+                    </a>
+                </form>
+            </div>
+            <div class="col-xs-6 col-sm-6">
+                <div class="pull-right">
+                    <a href="{% url 'datavis:datavis' dataset.id %}" role="button" class="btn btn-info">
+                        <div class="glyphicon glyphicon-eye-open"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    <div class="page-header">
+        <h4>{{ dataset.name }}</h4>
+    </div>
+
+    <p>{{ dataset.description }}</p>
+    <p>{{ dataset.identifier }}</p>
+    <p>{{ dataset.category_dataset }}</p>
+    <p>{{ dataset.open_data_source }}</p>
+{% endblock %}

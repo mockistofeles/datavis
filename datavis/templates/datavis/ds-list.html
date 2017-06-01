@@ -3,19 +3,19 @@
 {% block title %}Results{% endblock %}
 
 {% block content %}
-    <form action="{% url 'datavis:search' %}" method="post">
+    <form id="frm-list" action="{% url 'datavis:search' %}" method="post">
         {% csrf_token %}
         <div class="form-group">
-            <input type="text" class="form-control" id="topic" name="topic"
+            <input type="text" class="form-control" id="topic" name="topic" value="{{ topic }}"
                    placeholder="Search a topic, e. g.: health, ...">
         </div>
-        <button type="submit" class="btn btn-default">
-            <span class="glyphicon glyphicon-search"></span> Search
-        </button>
+        <div class="pull-right">
+            <button type="submit" class="btn btn-default">
+                <span class="glyphicon glyphicon-search"></span> Search
+            </button>
+        </div>
         <br>
         <br>
-    </form>
-    <form id="filter-frm" action="{% url 'datavis:filter' %}" method="post">
         <ul class="nav nav-tabs nav-justified">
             <li class="active">
                 <a data-toggle="tab" href="#info"><span class="glyphicon glyphicon-info-sign"></span> Info</a>
@@ -56,7 +56,7 @@
     {% if datasets %}
         {% for ds in datasets %}
             <div class="well">
-                <h5>{{ ds.name }}</h5>
+                <h5><a href="{% url 'datavis:detail' ds.id %}">{{ ds.name }}</a></h5>
                 <h6>{{ ds.description }}</h6>
                 <p>{{ ds.identifier }}</p>
             </div>
