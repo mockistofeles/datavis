@@ -25,14 +25,21 @@
     <div ng-controller="GraphController" class="overflow-x:auto">
         <script type="text/javascript">
             var ds = jQuery.parseJSON(JSON.stringify({{ data|safe }}));
+            var meta = jQuery.parseJSON(JSON.stringify({{ metadata.columns|safe }}));
         </script>
         {% verbatim %}
-            <table>
-                <tr ng-repeat="x in datatable">
-                    <td>{{ x.producto }}</td>
-                    <td>{{ x.cantidad }}</td>
+        <div style="overflow-x:auto;height:50em;overflow-x:auto">
+            <table class="table">
+                <tr>
+                    <th ng-repeat="x in meta">{{ x.fieldName }}</th>
+                </tr>
+                <tr ng-repeat="y in datatable|limitTo:100">
+                    <td ng-repeat="z in meta">{{ y[z.fieldName] }}</td>
                 </tr>
             </table>
+        </div>
+        <br />
+        <div ng-if="datatable.length > 100">* Se muestran solo 100 registros</div>
         {% endverbatim %}
     </div>
 {% endblock %}

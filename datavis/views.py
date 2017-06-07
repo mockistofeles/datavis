@@ -62,9 +62,11 @@ def datavis(request, dataset_id):
     ods = OpenDataSource.objects.get(pk=dataset_id)
     client = Socrata(ods.website, ods.token, ods.user, ods.password)
     dataset = DataSet.objects.get(pk=dataset_id)
-    data = client.get(dataset.identifier, where="fechaexpedicion > '01/01/2015'", limit=10)
+    data = client.get(dataset.identifier)
+    metadata = client.get_metadata(dataset.identifier)
     client.close()
     template = loader.get_template('datavis/datavis.html')
     data = json.dumps(data, indent=4, sort_keys=True)
-    context = {'data': data, 'dataset': dataset}
+    context = {'data': data, 'metadata': metadata, 'dataset': dataset}
     return HttpResponse(template.render(context, request))
+
