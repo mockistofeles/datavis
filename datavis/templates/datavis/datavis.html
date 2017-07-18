@@ -42,4 +42,13 @@
         <div ng-if="datatable.length > 100">* Se muestran solo 100 registros</div>
         {% endverbatim %}
     </div>
+    <hr />
+    <h5>Names</h5>
+    {% if names %}
+        {% for name in names %}
+            <p>{{ name }}</p>
+        {% endfor %}
+    {% else %}
+        <p>No results.</p>
+    {% endif %}
 {% endblock %}

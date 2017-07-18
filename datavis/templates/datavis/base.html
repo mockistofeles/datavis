@@ -5,9 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DataVis - {% block title %}{% endblock %}</title>
-    <script src="{% static 'datavis/js/vendor.js' %}"></script>
+    <script src="{% static 'datavis/js/jquery.js' %}"></script>
+    <script src="{% static 'datavis/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'datavis/js/angular.min.js' %}"></script>
+    <script src="{% static 'datavis/js/angular-ui-router.min.js' %}"></script>
+    <script src="{% static 'datavis/js/d3.min.js' %}"></script>
+    <script src="{% static 'datavis/js/materialize.min.js' %}"></script>
+    <script src="{% static 'datavis/js/materialPreloader.min.js' %}"></script>
     <script src="{% static 'datavis/js/smartcities.min.js' %}"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'datavis/css/smartcities.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'datavis/css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'datavis/css/font-awesome.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'datavis/css/materialize.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'datavis/css/materialPreloader.min.css' %}"/>
 </head>
 <body ng-app="DatavisApp">
 <!-- HEADER -->

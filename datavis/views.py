@@ -69,4 +69,3 @@ def datavis(request, dataset_id):
     data = json.dumps(data, indent=4, sort_keys=True)
     context = {'data': data, 'metadata': metadata, 'dataset': dataset}
     return HttpResponse(template.render(context, request))
-
