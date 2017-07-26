@@ -5,7 +5,7 @@
 {% block content %}
         <div class="row">
             <div class="col-xs-6 col-sm-6">
-                <form action="{% url 'datavis:search' %}" method="post">
+                <form action="{% url 'datavis:search' %}" method="get">
                     {% csrf_token %}
                     <input type="hidden" name="topic" value="{{ topic }}" />
                     <a href="{% url 'datavis:search' %}" role="button" class="btn btn-primary btn-lg">

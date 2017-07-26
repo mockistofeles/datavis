@@ -3,7 +3,7 @@
 {% block title %}Results{% endblock %}
 
 {% block content %}
-    <form id="frm-list" action="{% url 'datavis:search' %}" method="post">
+    <form id="frm-list" action="{% url 'datavis:search' %}" method="get">
         {% csrf_token %}
         <div class="form-group">
             <input type="text" class="form-control" id="topic" name="topic" value="{{ topic }}"

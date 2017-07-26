@@ -6,7 +6,7 @@
     <h3>Data Visualizer <small>by rodcruzh</small></h3>
     <hr />
     <h6>Which topic do you want to search?</h6>
-    <form action="{% url 'datavis:search' %}" method="post">
+    <form action="{% url 'datavis:search' %}" method="get">
         {% csrf_token %}
         <div class="form-group">
             <input type="text" class="form-control" id="topic" name="topic"

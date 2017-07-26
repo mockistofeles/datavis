@@ -33,13 +33,13 @@
                 <tr>
                     <th ng-repeat="x in meta">{{ x.fieldName }}</th>
                 </tr>
-                <tr ng-repeat="y in datatable|limitTo:100">
+                <tr ng-repeat="y in datatable|limitTo:10">
                     <td ng-repeat="z in meta">{{ y[z.fieldName] }}</td>
                 </tr>
             </table>
         </div>
         <br />
-        <div ng-if="datatable.length > 100">* Se muestran solo 100 registros</div>
+        <div ng-if="datatable.length > 10">* Se muestran solo 10 registros</div>
         {% endverbatim %}
     </div>
     <hr />
